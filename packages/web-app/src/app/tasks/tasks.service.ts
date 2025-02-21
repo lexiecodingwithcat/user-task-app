@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Task } from '@take-home/shared';
+import { Observable, scheduled } from 'rxjs';
+import { Task, TaskPriority } from '@take-home/shared';
 import { StorageService } from '../storage/storage.service';
 
 @Injectable({ providedIn: 'root' })
@@ -30,12 +30,27 @@ export class TasksService {
         break;
       case 'priority':
         // TODO: add fitler for taks with High Priority
-        throw new Error('Not implemented');
+        this.tasks = this.tasks.filter(
+          (task) => task.priority == TaskPriority.HIGH,
+        );
+        break;
+      // throw new Error('Not implemented');
       case 'scheduledDate':
         // TODO: add fitler for tasks Due Today
-        throw new Error('Not implemented');
+        this.tasks = this.tasks.filter((task) => {
+          const dueDate = new Date(task.scheduledDate);
+          const today = new Date();
+          return (
+            today.getFullYear() === dueDate.getFullYear() &&
+            today.getMonth() === dueDate.getMonth() &&
+            today.getDate() === dueDate.getDate()
+          );
+        });
+        break;
+      // throw new Error('Not implemented');
       case 'completed':
         this.tasks = this.tasks.filter((task) => !task.completed);
+        break;
     }
   }
 
