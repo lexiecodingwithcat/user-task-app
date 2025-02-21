@@ -46,7 +46,7 @@ export class AddComponent {
     // TODO: navigate to home page
     this.router.navigate(['/']);
 
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
   }
 
   onCancel(): void {
