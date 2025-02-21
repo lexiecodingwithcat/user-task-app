@@ -6,15 +6,16 @@ import { StorageService } from '../../storage/storage.service';
 import { faker } from '@faker-js/faker';
 
 @Component({
-    selector: 'take-home-add-component',
-    templateUrl: './add.component.html',
-    styleUrls: ['./add.component.scss'],
-    standalone: false
+  selector: 'take-home-add-component',
+  templateUrl: './add.component.html',
+  styleUrls: ['./add.component.scss'],
+  standalone: false,
 })
 export class AddComponent {
   protected addTaskForm: FormGroup = new FormGroup({
     title: new FormControl(null, {
       // TODO: add validators for required and min length 10
+      validators: [Validators.required, Validators.minLength(10)],
     }),
     description: new FormControl(null),
     priority: new FormControl(
@@ -25,6 +26,8 @@ export class AddComponent {
     ),
   });
   protected priorities = Object.values(TaskPriority);
+  // error messgae
+  protected errMessage: string | null = null;
 
   constructor(private storageService: StorageService, private router: Router) {}
 
@@ -38,12 +41,17 @@ export class AddComponent {
     };
 
     // TODO: save updated task to storage
+    this.storageService.addTaskItem(newTask);
+
     // TODO: navigate to home page
+    this.router.navigate(['/']);
+
     throw new Error('Not implemented');
   }
 
   onCancel(): void {
     // TODO: navigate to home page
-    throw new Error('Not implemented');
+    this.router.navigate(['/']);
+    // throw new Error('Not implemented');
   }
 }
