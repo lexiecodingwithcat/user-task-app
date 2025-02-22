@@ -23,7 +23,9 @@ export class ListComponent {
 
   onDoneTask(item: Task): void {
     // TODO: mark as completed
+    item.completed = true;
     // TODO: save updated task to storage
+    this.storageService.updateTaskItem(item);
     throw new Error('Not implemented');
   }
 
