@@ -26,14 +26,18 @@ export class ListComponent {
     item.completed = true;
     // TODO: save updated task to storage
     this.storageService.updateTaskItem(item);
-    throw new Error('Not implemented');
+    // throw new Error('Not implemented');
   }
 
   onDeleteTask(item: Task): void {
     // TODO: mark as archived
+    item.isArchived = true;
     // TODO: save updated task to storage
+    this.storageService.updateTaskItem(item);
     // TODO: refresh list without archived items
-    throw new Error('Not implemented');
+    this.getTaskList();
+
+    // throw new Error('Not implemented');
   }
 
   onAddTask(): void {
