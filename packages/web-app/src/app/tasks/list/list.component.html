@@ -22,10 +22,12 @@
 
   <div class="tasks">
     <ng-container *ngFor="let item of tasksService.tasks">
-      <mat-card [class.complete]="item.completed">
+      <mat-card>
         <div class="header-container">
-          <mat-card-title>{{ item.title }}</mat-card-title
-          ><mat-card-footer *ngIf="item.priority === 'HIGH'">
+          <mat-card-title [class.line-through]="item.completed">{{
+            item.title
+          }}</mat-card-title>
+          <mat-card-footer *ngIf="item.priority === 'HIGH'">
             <span class="high-priority">{{ item.priority }}</span>
           </mat-card-footer>
         </div>
