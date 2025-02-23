@@ -12,6 +12,11 @@ import { faker } from '@faker-js/faker';
   standalone: false,
 })
 export class AddComponent {
+  protected minDate: Date = new Date();
+  protected maxDate: Date = new Date(
+    new Date().setDate(this.minDate.getDate() + 7),
+  );
+
   protected addTaskForm: FormGroup = new FormGroup({
     title: new FormControl(null, {
       // TODO: add validators for required and min length 10
@@ -24,6 +29,9 @@ export class AddComponent {
         validators: Validators.required,
       },
     ),
+    scheduledDate: new FormControl(new Date(), {
+      validators: [Validators.required],
+    }),
   });
   protected priorities = Object.values(TaskPriority);
   // error messgae
@@ -37,7 +45,7 @@ export class AddComponent {
       uuid: faker.string.uuid(),
       isArchived: false,
       // TODO: allow user to set scheduled date using MatDatePicker
-      scheduledDate: new Date(),
+      // scheduledDate: new Date(),
     };
 
     // TODO: save updated task to storage
@@ -45,7 +53,6 @@ export class AddComponent {
 
     // TODO: navigate to home page
     this.router.navigate(['/']);
-
     // throw new Error('Not implemented');
   }
 

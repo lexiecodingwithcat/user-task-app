@@ -5,6 +5,24 @@
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title" class="text-field" />
     </mat-form-field>
+    <!-- date picker -->
+    <mat-form-field>
+      <mat-label>Schdule a due date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Please choose a date within 7 days"
+        [min]="minDate"
+        [max]="maxDate"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
     <mat-form-field>
       <mat-label>Description</mat-label>
       <textarea rows="4" matInput formControlName="description"> </textarea>
