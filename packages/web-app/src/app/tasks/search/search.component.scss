@@ -1,0 +1,25 @@
+.input-container {
+  position: relative;
+
+  input {
+    height: 30px;
+    width: 150px;
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 2px 8px;
+    transition: height 0.5s ease;
+  }
+  input:focus {
+    height: 40px;
+    border-color: #dad2ff;
+    outline: none;
+  }
+  span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    color: #d0d0d0;
+  }
+}

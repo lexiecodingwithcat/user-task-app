@@ -23,15 +23,25 @@ export class ListComponent {
 
   onDoneTask(item: Task): void {
     // TODO: mark as completed
+    item.completed = true;
     // TODO: save updated task to storage
-    throw new Error('Not implemented');
+    this.storageService.updateTaskItem(item);
+    // throw new Error('Not implemented');
   }
 
   onDeleteTask(item: Task): void {
+    const confirm: boolean = window.confirm('Do you want to delete this task?');
+    if (!confirm) {
+      return;
+    }
     // TODO: mark as archived
+    item.isArchived = true;
     // TODO: save updated task to storage
+    this.storageService.updateTaskItem(item);
     // TODO: refresh list without archived items
-    throw new Error('Not implemented');
+    this.getTaskList();
+
+    // throw new Error('Not implemented');
   }
 
   onAddTask(): void {
