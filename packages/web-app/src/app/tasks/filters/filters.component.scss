@@ -3,6 +3,7 @@
 
   mat-chip-option {
     background-color: rgba(46, 46, 46, 0.1);
+    transition: background-color 0.8s ease;
   }
   mat-chip-option:hover {
     background-color: #dad2ff;
