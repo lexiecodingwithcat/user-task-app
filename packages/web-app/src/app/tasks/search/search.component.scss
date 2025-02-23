@@ -1,0 +1,23 @@
+.input-container {
+  position: relative;
+
+  input {
+    height: 30px;
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 2px 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  input:focus {
+    border-color: #a294f9;
+    outline: none;
+  }
+  span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    color: #d0d0d0;
+  }
+}

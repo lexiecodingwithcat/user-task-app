@@ -5,6 +5,12 @@
     display: flex;
     justify-content: flex-start;
     gap: var(--layout-gap-size);
+    justify-content: flex-start;
+    margin: 10px auto;
+  }
+  .add-task-button {
+    border: 1px solid lightgray;
+    border-radius: 10px;
   }
 
   .tasks {
@@ -24,4 +30,9 @@
       }
     }
   }
+}
+
+.filter-search-container {
+  display: flex;
+  justify-content: space-between;
 }

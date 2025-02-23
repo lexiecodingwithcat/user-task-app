@@ -1,8 +1,14 @@
 <div class="container">
   <form [formGroup]="searchForm">
-    <mat-form-field>
-      <mat-label>Search</mat-label>
-      <input matInput type="text" formControlName="search" />
-    </mat-form-field>
+    <div class="input-container">
+      <!-- <mat-label>Search</mat-label> -->
+      <input
+        matInput
+        type="text"
+        formControlName="search"
+        placeholder="Search"
+      />
+      <span class="material-icons">search</span>
+    </div>
   </form>
 </div>
