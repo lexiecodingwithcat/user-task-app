@@ -30,6 +30,10 @@ export class ListComponent {
   }
 
   onDeleteTask(item: Task): void {
+    const confirm: boolean = window.confirm('Do you want to delete this task?');
+    if (!confirm) {
+      return;
+    }
     // TODO: mark as archived
     item.isArchived = true;
     // TODO: save updated task to storage

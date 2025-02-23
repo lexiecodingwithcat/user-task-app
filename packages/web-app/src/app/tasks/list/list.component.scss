@@ -11,23 +11,84 @@
   .add-task-button {
     border: 1px solid lightgray;
     border-radius: 10px;
+    background-color: #b2a5ff;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    mat-card-title {
+      font-weight: 600;
+      color: #2e2e2e;
+    }
   }
 
   .tasks {
     display: inline-flex;
     flex-direction: column;
-    margin: 5px;
+    // margin: 5px;
     width: min(calc(100vw - var(--layout-padding)), var(--layout-width-max));
     gap: var(--layout-gap-size);
 
     mat-card {
       padding: var(--layout-padding);
-      &.complete {
-        background-color: var(--success-color);
-      }
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
       .high-priority {
         color: var(--error-color);
       }
+
+      .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .description-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+        gap: 5px;
+      }
+      .description-container mat-card-header,
+      mat-card-content {
+        padding: 0;
+      }
+      .description-container mat-card-content {
+        color: #505050;
+      }
+
+      .button-container {
+        display: flex;
+        margin: 0;
+        padding: 0;
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+          min-width: 40px;
+          height: 40px;
+          width: 40px;
+
+          mat-icon {
+            margin: 0;
+          }
+        }
+        .done-button:hover {
+          background-color: var(--success-color);
+        }
+        .delete-button:hover {
+          background-color: var(--error-color);
+        }
+      }
+    }
+
+    mat-card:hover {
+      box-shadow: 0 2px 5px #dad2ff;
     }
   }
 }
