@@ -91,9 +91,27 @@
         }
       }
     }
+    @keyframes hoverWobble {
+      0% {
+        transform: rotate(0);
+      }
+      25% {
+        transform: rotate(1deg);
+      }
+      50% {
+        transform: rotate(-1deg);
+      }
+      75% {
+        transform: rotate(1deg);
+      }
+      100% {
+        transform: rotate(0);
+      }
+    }
 
     mat-card:hover {
       box-shadow: 0 2px 5px #dad2ff;
+      animation: hoverWobble 1s ease-in-out;
     }
   }
 }
