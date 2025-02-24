@@ -17,7 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
 
 class MockStorageService {
-  updateTaskItem(): void {
+  addTaskItem(): void {
     return;
   }
 }
@@ -96,11 +96,14 @@ describe('AddComponent', () => {
   it(`should create a new task for a valid submission and navigate home`, async () => {
     jest.spyOn(router, 'navigateByUrl').mockResolvedValue(true);
     jest.spyOn(component, 'onSubmit');
-    jest.spyOn(storageService, 'updateTaskItem').mockResolvedValue();
+    jest.spyOn(storageService, 'addTaskItem').mockResolvedValue();
     component['addTaskForm'].controls['title'].setValue('Adding a test task');
     component['addTaskForm'].controls['description'].setValue(
       'This task should be added to the list',
     );
+    component.addTaskForm.controls['priority'].setValue('Medium');
+    component.addTaskForm.controls['scheduledDate'].setValue(new Date());
+
     fixture.detectChanges();
     const addButton = await loader.getHarness(
       MatButtonHarness.with({ selector: '[data-testid="add-task"]' }),
@@ -108,8 +111,8 @@ describe('AddComponent', () => {
     await addButton.click();
     fixture.detectChanges();
     expect(component.onSubmit).toBeCalledTimes(1);
-    expect(storageService.updateTaskItem).toBeCalledTimes(1);
-    expect(storageService.updateTaskItem).toBeCalledWith(
+    expect(storageService.addTaskItem).toBeCalledTimes(1);
+    expect(storageService.addTaskItem).toBeCalledWith(
       expect.objectContaining({
         isArchived: false,
         title: 'Adding a test task',
