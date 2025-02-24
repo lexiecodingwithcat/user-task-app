@@ -12,6 +12,9 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Router } from '@angular/router';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerInputHarness } from '@angular/material/datepicker/testing';
 
 class MockStorageService {
   updateTaskItem(): void {
@@ -37,6 +40,8 @@ describe('AddComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
       ],
       declarations: [AddComponent],
       providers: [{ provide: StorageService, useClass: MockStorageService }],
@@ -58,7 +63,7 @@ describe('AddComponent', () => {
 
   it('should display the title', () => {
     const title = fixture.debugElement.query(By.css('h1'));
-    expect(title.nativeElement.textContent).toEqual('Add Task');
+    expect(title.nativeElement.textContent).toEqual('Add a new task ✔️');
   });
 
   it(`should navigate to home when cancel button is clicked`, async () => {
@@ -112,5 +117,32 @@ describe('AddComponent', () => {
       }),
     );
     expect(router.navigateByUrl).toHaveBeenCalledWith('/');
+  });
+
+  it('should allow setting a due date within 7 days via input and update form value', async () => {
+    const dateInput = await loader.getHarness(
+      MatDatepickerInputHarness.with({
+        selector: '[formControlName="scheduledDate"]',
+      }),
+    );
+
+    const today = new Date();
+    const validDate = new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000);
+    validDate.setUTCHours(7, 0, 0, 0);
+    const validDateString = validDate.toLocaleDateString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+      timeZone: 'America/Edmonton',
+    });
+
+    await dateInput.setValue(validDateString);
+
+    fixture.detectChanges();
+
+    const dueDateControl = component.addTaskForm.controls['scheduledDate'];
+    expect(dueDateControl.value).toEqual(validDate);
+    expect(dueDateControl.value >= component.minDate).toBeTruthy();
+    expect(dueDateControl.value <= component.maxDate).toBeTruthy();
   });
 });

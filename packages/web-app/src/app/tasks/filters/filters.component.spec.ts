@@ -45,9 +45,9 @@ describe('FiltersComponent', () => {
     jest.spyOn(tasksService, 'filterTask');
     const matChips = await loader.getAllHarnesses(MatChipOptionHarness);
     expect(matChips.length).toEqual(3);
-    expect(await matChips[0].getText()).toEqual('High Priority');
-    expect(await matChips[1].getText()).toEqual('Not Complete');
-    expect(await matChips[2].getText()).toEqual('Due Today');
+    expect(await matChips[0].getText()).toEqual('High Priority❗');
+    expect(await matChips[1].getText()).toEqual('Not Complete ✏️');
+    expect(await matChips[2].getText()).toEqual('Due Today 💥');
   });
 
   it('should filter tasks by priority', async () => {

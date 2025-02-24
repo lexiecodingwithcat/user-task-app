@@ -91,13 +91,13 @@ describe('ListComponent', () => {
 
   it('should display the title', () => {
     const title = fixture.debugElement.query(By.css('h1'));
-    expect(title.nativeElement.textContent).toEqual('My Daily Tasks');
+    expect(title.nativeElement.textContent).toEqual('Hi, Lexie 👋');
   });
 
   it(`should display total number of tasks`, () => {
     const total = fixture.debugElement.query(By.css('h3'));
     expect(total.nativeElement.textContent).toEqual(
-      `Total Tasks: ${fakeTasks.length}`,
+      `You have ${fakeTasks.length} tasks in total.`,
     );
   });
 
@@ -113,7 +113,7 @@ describe('ListComponent', () => {
     );
     await addButton.click();
     fixture.detectChanges();
-    expect(router.navigate).toHaveBeenCalledWith(['add']);
+    expect(router.navigate).toHaveBeenCalledWith(['/add']);
   });
 
   it(`should mark a task as complete when done button is clicked`, async () => {

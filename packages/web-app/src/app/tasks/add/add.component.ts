@@ -12,12 +12,12 @@ import { faker } from '@faker-js/faker';
   standalone: false,
 })
 export class AddComponent {
-  protected minDate: Date = new Date();
-  protected maxDate: Date = new Date(
+  public minDate: Date = new Date();
+  public maxDate: Date = new Date(
     new Date().setDate(this.minDate.getDate() + 7),
   );
 
-  protected addTaskForm: FormGroup = new FormGroup({
+  public addTaskForm: FormGroup = new FormGroup({
     title: new FormControl(null, {
       // TODO: add validators for required and min length 10
       validators: [Validators.required, Validators.minLength(10)],
