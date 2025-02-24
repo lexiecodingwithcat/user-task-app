@@ -13,14 +13,9 @@
       justify-content: center;
       gap: var(--layout-gap-size);
 
-      .add-button {
-        // border: 1px solid lightgray;
-        background-color: var(--success-color);
-        color: black;
-      }
-
       .cancle-button {
-        background-color: var(--error-color);
+        border: 1px solid #e1bee7;
+        background-color: transparent;
         color: black;
       }
     }
@@ -33,4 +28,9 @@
     border-radius: 10px;
     border: 1px solid lightgray;
   }
+}
+
+.date-priority-conatiner {
+  display: flex;
+  gap: 50px;
 }
