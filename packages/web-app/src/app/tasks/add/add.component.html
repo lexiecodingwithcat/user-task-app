@@ -16,6 +16,7 @@
         <mat-label>Schdule a due date</mat-label>
         <input
           matInput
+          formControlName="scheduledDate"
           [matDatepicker]="picker"
           placeholder="Please choose a date within 7 days"
           [min]="minDate"
