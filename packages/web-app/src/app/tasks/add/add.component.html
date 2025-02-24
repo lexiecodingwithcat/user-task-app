@@ -1,44 +1,47 @@
 <div class="container">
-  <h1>Add Task</h1>
+  <h1>Add a new task ✔️</h1>
   <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title" class="text-field" />
-    </mat-form-field>
-    <!-- date picker -->
-    <mat-form-field>
-      <mat-label>Schdule a due date</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        placeholder="Please choose a date within 7 days"
-        [min]="minDate"
-        [max]="maxDate"
-      />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Description</mat-label>
       <textarea rows="4" matInput formControlName="description"> </textarea>
     </mat-form-field>
-    <mat-form-field data-testid="priority-form-field" floatLabel="always">
-      <mat-label>Priority</mat-label>
-      <mat-select
-        formControlName="priority"
-        data-testid="priority-select"
-        class="priority-select"
-      >
-        <mat-option *ngFor="let option of priorities" [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="date-priority-conatiner">
+      <!-- date picker -->
+      <mat-form-field>
+        <mat-label>Schdule a due date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Please choose a date within 7 days"
+          [min]="minDate"
+          [max]="maxDate"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field data-testid="priority-form-field" floatLabel="always">
+        <mat-label>Priority</mat-label>
+        <mat-select
+          formControlName="priority"
+          data-testid="priority-select"
+          class="priority-select"
+        >
+          <mat-option *ngFor="let option of priorities" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
     <div class="action-button-row">
       <button
@@ -46,7 +49,6 @@
         mat-flat-button
         color="primary"
         [disabled]="addTaskForm.invalid"
-        class="add-button"
       >
         Add
       </button>
