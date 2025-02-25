@@ -52,13 +52,13 @@ export class AddComponent {
     this.storageService.addTaskItem(newTask);
 
     // TODO: navigate to home page
-    this.router.navigate(['/']);
+    this.router.navigateByUrl('/');
     // throw new Error('Not implemented');
   }
 
   onCancel(): void {
     // TODO: navigate to home page
-    this.router.navigate(['/']);
+    this.router.navigateByUrl('/');
     // throw new Error('Not implemented');
   }
 }
