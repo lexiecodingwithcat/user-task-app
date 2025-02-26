@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { SearchComponent } from './search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -33,6 +33,10 @@ describe('SearchComponent', () => {
     fixture = TestBed.createComponent(SearchComponent);
   });
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SearchComponent);
+    fixture.detectChanges();
+  });
   it('should create', () => {
     expect(fixture.componentInstance).toBeDefined();
   });

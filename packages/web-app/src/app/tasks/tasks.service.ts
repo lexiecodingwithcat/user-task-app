@@ -30,7 +30,7 @@ export class TasksService {
         this.tasks = this.tasks.filter((task) => !task.isArchived);
         break;
       case 'priority':
-        // TODO: add fitler for taks with High Priority
+        // TODO: add filter for tasks with High Priority
         this.tasks = this.tasks.filter(
           (task) => task.priority == TaskPriority.HIGH,
         );
