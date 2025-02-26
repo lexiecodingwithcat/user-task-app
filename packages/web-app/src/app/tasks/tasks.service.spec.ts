@@ -124,6 +124,20 @@ describe('TasksService', () => {
       expect(service.tasks.length).toEqual(2);
     });
 
-    it.todo('should search task list for a fuzzy match on title');
+    // it.todo('should search task list for a fuzzy match on title');
+    it('should search task list for a fuzzy match on title', () => {
+      const initialTasks = [
+        generateTask({ title: 'Take home assignment' }),
+        generateTask({ title: 'Thank you for your time' }),
+      ];
+      service.tasks = [...initialTasks];
+
+      service.searchTask('hoem');
+
+      expect(service.tasks.length).toEqual(1);
+      expect(
+        service.tasks.some((task) => task.title === 'Take home assignment'),
+      ).toBeTruthy();
+    });
   });
 });

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, scheduled } from 'rxjs';
 import { Task, TaskPriority } from '@take-home/shared';
 import { StorageService } from '../storage/storage.service';
+import Fuse from 'fuse.js';
 
 @Injectable({ providedIn: 'root' })
 export class TasksService {
@@ -29,7 +30,7 @@ export class TasksService {
         this.tasks = this.tasks.filter((task) => !task.isArchived);
         break;
       case 'priority':
-        // TODO: add fitler for taks with High Priority
+        // TODO: add filter for tasks with High Priority
         this.tasks = this.tasks.filter(
           (task) => task.priority == TaskPriority.HIGH,
         );
@@ -57,9 +58,17 @@ export class TasksService {
   searchTask(search: string): void {
     if (search) {
       // TODO: filter tasks which title include search value
-      this.tasks = this.tasks.filter((task) =>
-        task.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()),
-      );
+      const fuse = new Fuse(this.tasks, {
+        keys: ['title'],
+        threshold: 0.4,
+        ignoreLocation: true,
+        minMatchCharLength: 2,
+      });
+      const fuseTasks = fuse.search(search.toLowerCase());
+      this.tasks = fuseTasks.map((task) => task.item);
+      // this.tasks = this.tasks.filter((task) =>
+      //   task.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()),
+      // );
       // throw new Error('Not implemented');
     } else {
       // TODO: reload all tasks from storage
