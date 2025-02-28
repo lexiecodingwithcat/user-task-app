@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http/testing';
 import { StorageService } from '../storage/storage.service';
 import { Task, TaskPriority, generateTask } from '@take-home/shared';
+import { scheduled } from 'rxjs';
 
 class MockStorageService {
   getTasks(): Promise<Task[]> {
@@ -102,7 +103,15 @@ describe('TasksService', () => {
       expect(service.tasks.length).toEqual(1);
     });
 
-    it.todo('should filter task by scheduledDate key');
+    //   it('should filter task by scheduledDate key', () => {
+    //     service.tasks = [
+    //       generateTask({ scheduledDate: new Date('2025-02-26') }),
+    //       // generateTask({ scheduledDate: null }),
+    //     ];
+    //     service.filterTask('scheduledDate');
+    //     expect(service.tasks.length).toEqual(1);
+    //     expect(service.tasks[0]).toEqual(service.tasks[1]);
+    //   });
   });
 
   describe('searchTask', () => {
