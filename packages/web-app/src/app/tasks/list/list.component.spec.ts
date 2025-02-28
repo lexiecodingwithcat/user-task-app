@@ -21,8 +21,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const fakeTasks: Task[] = [
-  generateTask({ uuid: '3', completed: false }),
-  generateTask({ uuid: '4', completed: false }),
+  generateTask({ uuid: '3', completed: false, isArchived: false }),
+  generateTask({ uuid: '4', completed: false, isArchived: false }),
 ];
 
 class MockTasksService {
@@ -79,6 +79,7 @@ describe('ListComponent', () => {
   beforeEach(() => {
     router = TestBed.inject(Router);
     tasksService = TestBed.inject(TasksService);
+    tasksService.tasks = fakeTasks.map((task) => ({ ...task }));
     fixture = TestBed.createComponent(ListComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
@@ -142,5 +143,29 @@ describe('ListComponent', () => {
     expect(tasksService.tasks[0].isArchived).toBe(true);
   });
 
-  it.todo(`should not display archived tasks after deleting them`);
+  // it.todo(`should not display archived tasks after deleting them`);
+  it(`should not display archived tasks after deleting them`, async () => {
+    expect(tasksService.tasks[0].isArchived).toBe(false);
+    expect(tasksService.tasks[1].isArchived).toBe(false);
+
+    let taskLists = fixture.debugElement.queryAll(By.css('mat-card'));
+    expect(taskLists.length).toEqual(fakeTasks.length);
+
+    jest.spyOn(component, 'onDeleteTask');
+
+    const deleteButton = await loader.getHarness(
+      MatButtonHarness.with({ selector: '[data-testid="delete-task"]' }),
+    );
+    await deleteButton.click();
+    deleteButton.click();
+    fixture.detectChanges();
+
+    expect(component.onDeleteTask).toHaveBeenCalledTimes(1);
+    expect(tasksService.tasks[0].isArchived).toBe(true);
+
+    let taskListsAfterDelete = fixture.debugElement.queryAll(
+      By.css('mat-card'),
+    );
+    expect(taskLists.length).toEqual(taskListsAfterDelete.length);
+  });
 });
