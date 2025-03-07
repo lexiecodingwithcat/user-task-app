@@ -35,7 +35,7 @@ export class AddComponent {
   });
   protected priorities = Object.values(TaskPriority);
   // error messgae
-  protected errMessage: string | null = null;
+  // protected errMessage: string | null = null;
 
   constructor(private storageService: StorageService, private router: Router) {}
 
