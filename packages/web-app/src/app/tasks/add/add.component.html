@@ -4,6 +4,9 @@
     <mat-form-field>
       <mat-label>Title</mat-label>
       <input matInput type="text" formControlName="title" class="text-field" />
+      <mat-error *ngIf="addTaskForm.get('title')?.hasError('minlength')">
+        Title must be at least 10 characters long
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
