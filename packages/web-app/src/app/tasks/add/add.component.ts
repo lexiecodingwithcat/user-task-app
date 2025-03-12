@@ -34,25 +34,25 @@ export class AddComponent {
     }),
   });
   protected priorities = Object.values(TaskPriority);
-  // error messgae
-  // protected errMessage: string | null = null;
 
   constructor(private storageService: StorageService, private router: Router) {}
 
-  onSubmit() {
-    const newTask: Task = {
-      ...this.addTaskForm.getRawValue(),
-      uuid: faker.string.uuid(),
-      isArchived: false,
-      // TODO: allow user to set scheduled date using MatDatePicker
-      // scheduledDate: new Date(),
-    };
-
-    // TODO: save updated task to storage
-    this.storageService.addTaskItem(newTask);
-
-    // TODO: navigate to home page
-    this.router.navigateByUrl('/');
+  async onSubmit() {
+    try {
+      const newTask: Task = {
+        ...this.addTaskForm.getRawValue(),
+        uuid: faker.string.uuid(),
+        isArchived: false,
+        // TODO: allow user to set scheduled date using MatDatePicker
+        // scheduledDate: new Date(),
+      };
+      // TODO: save updated task to storage
+      this.storageService.addTaskItem(newTask);
+      // TODO: navigate to home page
+      this.router.navigateByUrl('/');
+    } catch (err) {
+      console.log('Error when submiting the form:', err);
+    }
     // throw new Error('Not implemented');
   }
 

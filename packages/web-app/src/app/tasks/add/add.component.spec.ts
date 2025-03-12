@@ -131,7 +131,7 @@ describe('AddComponent', () => {
 
     const today = new Date();
     const validDate = new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000);
-    validDate.setUTCHours(7, 0, 0, 0);
+    validDate.setUTCHours(6, 0, 0, 0);
     const validDateString = validDate.toLocaleDateString('en-US', {
       month: '2-digit',
       day: '2-digit',
