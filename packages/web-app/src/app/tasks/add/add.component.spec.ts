@@ -125,7 +125,7 @@ describe('AddComponent', () => {
   it('should allow setting a due date within 7 days via input and update form value', async () => {
     const dateInput = await loader.getHarness(
       MatDatepickerInputHarness.with({
-        selector: '[formControlName="scheduledDate"]',
+        selector: '[data-testid="scheduledDate"]',
       }),
     );
 
@@ -147,5 +147,26 @@ describe('AddComponent', () => {
     expect(dueDateControl.value).toEqual(validDate);
     expect(dueDateControl.value >= component.minDate).toBeTruthy();
     expect(dueDateControl.value <= component.maxDate).toBeTruthy();
+  });
+
+  it('should reject dates beyond 7 days', async () => {
+    const dateInput = await loader.getHarness(
+      MatDatepickerInputHarness.with({
+        selector: '[data-testid="scheduledDate"]',
+      }),
+    );
+    const today = new Date();
+    const validDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+    validDate.setUTCHours(6, 0, 0, 0);
+    const validDateString = validDate.toLocaleDateString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+      timeZone: 'America/Edmonton',
+    });
+    await dateInput.setValue(validDateString);
+    fixture.detectChanges();
+    const dueDateControl = component.addTaskForm.controls['scheduledDate'];
+    expect(dueDateControl.errors).toBeTruthy();
   });
 });
