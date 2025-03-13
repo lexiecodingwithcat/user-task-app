@@ -62,11 +62,11 @@ export class TasksService {
       // TODO: filter tasks which title include search value
       const fuse = new Fuse(this.tasks, {
         keys: ['title'],
-        threshold: 0.4,
+        threshold: 0.6,
         ignoreLocation: true,
         minMatchCharLength: 2,
       });
-      const fuseTasks = fuse.search(search.toLowerCase());
+      const fuseTasks = fuse.search(search);
       this.tasks = fuseTasks.map((task) => task.item);
       // this.tasks = this.tasks.filter((task) =>
       //   task.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()),
