@@ -26,9 +26,9 @@ export class TasksService {
 
   filterTask(key: keyof Task): void {
     switch (key) {
-      case 'isArchived':
-        this.tasks = this.tasks.filter((task) => !task.isArchived);
-        break;
+      // case 'isArchived':
+      //   this.tasks = this.tasks.filter((task) => !task.isArchived);
+      //   break;
       case 'priority':
         // TODO: add filter for tasks with High Priority
         this.tasks = this.tasks.filter(
@@ -51,6 +51,8 @@ export class TasksService {
       // throw new Error('Not implemented');
       case 'completed':
         this.tasks = this.tasks.filter((task) => !task.completed);
+        break;
+      default:
         break;
     }
   }
