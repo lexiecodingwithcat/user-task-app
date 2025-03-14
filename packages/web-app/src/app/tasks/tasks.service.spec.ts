@@ -103,18 +103,18 @@ describe('TasksService', () => {
       expect(service.tasks.length).toEqual(1);
     });
 
-    // it('should filter task by scheduledDate key', () => {
-    //   const today = new Date();
-    //   service.tasks = [
-    //     generateTask({ scheduledDate: new Date() }),
-    //     generateTask({
-    //       scheduledDate: new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000),
-    //     }),
-    //   ];
-    //   service.filterTask('scheduledDate');
-    //   expect(service.tasks.length).toEqual(1);
-    //   expect(service.tasks[0]).toEqual(service.tasks[1]);
-    // });
+    it('should filter task by scheduledDate key', () => {
+      const today = new Date();
+      service.tasks = [
+        generateTask({ scheduledDate: new Date() }),
+        generateTask({
+          scheduledDate: new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000),
+        }),
+      ];
+      service.filterTask('scheduledDate');
+      expect(service.tasks.length).toEqual(1);
+      expect(service.tasks[0].scheduledDate.getDate()).toBe(today.getDate());
+    });
   });
 
   describe('searchTask', () => {
