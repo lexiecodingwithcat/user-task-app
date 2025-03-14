@@ -178,7 +178,7 @@ describe('AddComponent', () => {
     //   timeZone: 'America/Edmonton',
     // });
     // await dateInput.setValue(validDateString);
-    const { dateStr } = getDaysNow(7);
+    const { dateStr } = getDaysNow(8);
     await dateInput.setValue(dateStr);
     fixture.detectChanges();
     const dueDateControl = component.addTaskForm.controls['scheduledDate'];
