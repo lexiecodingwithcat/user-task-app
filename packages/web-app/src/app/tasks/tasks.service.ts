@@ -62,7 +62,7 @@ export class TasksService {
       // TODO: filter tasks which title include search value
       const fuse = new Fuse(this.tasks, {
         keys: ['title'],
-        threshold: 0.6,
+        threshold: 0.4,
         ignoreLocation: true,
         minMatchCharLength: 2,
       });
