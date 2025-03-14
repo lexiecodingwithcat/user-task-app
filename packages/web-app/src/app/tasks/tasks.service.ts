@@ -66,7 +66,7 @@ export class TasksService {
         ignoreLocation: true,
         minMatchCharLength: 2,
       });
-      const fuseTasks = fuse.search(search.toLowerCase());
+      const fuseTasks = fuse.search(search);
       this.tasks = fuseTasks.map((task) => task.item);
       // this.tasks = this.tasks.filter((task) =>
       //   task.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()),
